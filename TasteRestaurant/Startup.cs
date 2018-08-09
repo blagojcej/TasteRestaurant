@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TasteRestaurant.Data;
 using TasteRestaurant.Services;
+using TasteRestaurant.Utility;
 
 namespace TasteRestaurant
 {
@@ -26,6 +27,7 @@ namespace TasteRestaurant
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSecrets>(Configuration);
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -39,6 +41,11 @@ namespace TasteRestaurant
                     options.Conventions.AuthorizeFolder("/Account/Manage");
                     options.Conventions.AuthorizePage("/Account/Logout");
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(SD.AdminEndUser, policy => policy.RequireRole(SD.AdminEndUser));
+            });
 
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
