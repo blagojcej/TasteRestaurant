@@ -11,9 +11,10 @@ using TasteRestaurant.Data;
 namespace TasteRestaurant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180807102114_AddCategoryTypeToDatabase")]
+    partial class AddCategoryTypeToDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,49 +195,6 @@ namespace TasteRestaurant.Data.Migrations
                     b.ToTable("CategoryTypes");
                 });
 
-            modelBuilder.Entity("TasteRestaurant.Data.FoodType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FoodTypes");
-                });
-
-            modelBuilder.Entity("TasteRestaurant.Data.MenuItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CategoryId");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<int>("FoodTypeId");
-
-                    b.Property<string>("Image");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<double>("Price");
-
-                    b.Property<string>("Spicyness");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("FoodTypeId");
-
-                    b.ToTable("MenuItems");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -279,19 +237,6 @@ namespace TasteRestaurant.Data.Migrations
                     b.HasOne("TasteRestaurant.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TasteRestaurant.Data.MenuItem", b =>
-                {
-                    b.HasOne("TasteRestaurant.Data.CategoryType", "CategoryType")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TasteRestaurant.Data.FoodType", "FoodType")
-                        .WithMany()
-                        .HasForeignKey("FoodTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

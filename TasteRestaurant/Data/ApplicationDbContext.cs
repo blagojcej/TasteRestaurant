@@ -9,6 +9,14 @@ namespace TasteRestaurant.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        #region Properties
+
+        public DbSet<CategoryType> CategoryTypes { get; set; }
+        public DbSet<FoodType> FoodTypes { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
+
+        #endregion Properties
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
