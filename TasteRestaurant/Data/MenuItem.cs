@@ -22,7 +22,8 @@ namespace TasteRestaurant.Data
             High = 2
         }
 
-        [Range(1,int.MaxValue, ErrorMessage = "Price should be greater than ${1}")]
+        [Range(1,double.MaxValue, ErrorMessage = "Price should be greater than ${1}")]
+        [DataType(DataType.Currency)]
         public double Price { get; set; }
 
         [Display(Name = "Category Type")]

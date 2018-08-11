@@ -11,9 +11,10 @@ using TasteRestaurant.Data;
 namespace TasteRestaurant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180810180750_AddShoppingCartToDatabase")]
+    partial class AddShoppingCartToDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,8 +248,6 @@ namespace TasteRestaurant.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ApplicationUserId");
-
-                    b.Property<int>("Count");
 
                     b.Property<int>("MenuItemId");
 

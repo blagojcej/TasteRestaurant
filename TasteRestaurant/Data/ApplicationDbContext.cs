@@ -14,6 +14,7 @@ namespace TasteRestaurant.Data
         public DbSet<CategoryType> CategoryTypes { get; set; }
         public DbSet<FoodType> FoodTypes { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         #endregion Properties
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using TasteRestaurant.Data;
 using TasteRestaurant.Services;
 using TasteRestaurant.Utility;
@@ -103,6 +104,8 @@ namespace TasteRestaurant.Pages.Account
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     //await _emailSender.SendEmailConfirmationAsync(Input.Email, callbackUrl);
+
+                    HttpContext.Session.SetInt32("CartCount", 0);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(Url.GetLocalUrl(returnUrl));
