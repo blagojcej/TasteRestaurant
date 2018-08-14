@@ -92,9 +92,9 @@ namespace TasteRestaurant.Pages.Cart
             DetailsCart.ListCart = _context.ShoppingCarts.Where(c => c.ApplicationUserId == claim.Value).ToList();
 
             OrderHeader orderHeader = DetailsCart.OrderHeader;
-            DetailsCart.OrderHeader.OrderDate=DateTime.Now;
-            DetailsCart.OrderHeader.UserId=claim.Value;
-            DetailsCart.OrderHeader.Status=SD.StatusSubmitted;
+            DetailsCart.OrderHeader.OrderDate = DateTime.Now;
+            DetailsCart.OrderHeader.UserId = claim.Value;
+            DetailsCart.OrderHeader.Status = SD.StatusSubmitted;
 
             _context.OrderHeaders.Add(orderHeader);
             _context.SaveChanges();
@@ -102,9 +102,9 @@ namespace TasteRestaurant.Pages.Cart
             foreach (var item in DetailsCart.ListCart)
             {
                 item.MenuItem = _context.MenuItems.FirstOrDefault(m => m.Id == item.MenuItemId);
-                OrderDetail orderDetail=new OrderDetail()
+                OrderDetail orderDetail = new OrderDetail()
                 {
-                    MenuItemId=item.MenuItemId,
+                    MenuItemId = item.MenuItemId,
                     OrderId = orderHeader.Id,
                     Name = item.MenuItem.Name,
                     Description = item.MenuItem.Description,
@@ -123,7 +123,7 @@ namespace TasteRestaurant.Pages.Cart
 
             _context.SaveChanges();
 
-            return RedirectToPage("../Index");
+            return RedirectToPage("../Order/OrderConfirmation", new { id = orderHeader.Id });
         }
     }
 }
