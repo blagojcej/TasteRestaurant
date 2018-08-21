@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using TasteRestaurant.Data;
 using TasteRestaurant.Services;
 using TasteRestaurant.Utility;
@@ -47,6 +43,18 @@ namespace TasteRestaurant
             {
                 options.AddPolicy(SD.AdminEndUser, policy => policy.RequireRole(SD.AdminEndUser));
             });
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["AppSecrets:FacebookApp:AppID"];
+                facebookOptions.AppSecret = Configuration["AppSecrets:FacebookApp:AppSecret"];
+            });
+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = Configuration["AppSecrets:GoogleApp:ClientID"];
+                    googleOptions.ClientSecret = Configuration["AppSecrets:GoogleApp:ClientSecret"];
+                });
 
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713

@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-TasteRestaurant-5AD9AD56-7AC4-48DD-A86F-50FF8DECCBF5</UserSecretsId>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="jQuery" Version="3.3.1" />
